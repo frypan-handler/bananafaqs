@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.cdnfonts.com/css/nunito-sans" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <style>
+        html {
+  box-sizing: border-box;
+  background: black;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h2{
+    font-weight:500;
+}
+a {
+    color: white;
+}
+.nav-dots {
+  position: fixed;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #52616a;
+  border-radius: 50%;
+  list-style: none;
+  background: #c9d6de;
+  transition: all 0.3s;
+
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+
+  &:hover,
+  &.is-active {
+    transform: scale(1.8);
+    background: transparent;
+  }
+}
+
+.section {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  padding: 12em;
+
+  &:nth-of-type(2n+1) {
+    background-color: #a5d296;
+  }
+
+  &:nth-of-type(2n+2) {
+    background-color: #47b8e0
+  }
+
+  &:nth-of-type(3n+3) {
+    background-color: #ffc952;
+  }
+
+  &:nth-of-type(4n+4) {
+    background-color: #ff7473;
+  }
+}
+
+
+.section_heading {
+  margin: 0;
+  color: white;
+  font-size: 32px;
+  text-transform: capitalize;
+}
+
+
+.btn.btn-primary {
+    &:nth-of-type(2n+1) {
+    background-color: #47b8e0;
+    }
+
+    &:nth-of-type(2n+2) {
+    background-color:  #ffc952
+    }
+
+    &:nth-of-type(3n+3) {
+    background-color: #ff7473;
+    }
+
+    &:nth-of-type(4n+4) {
+    background-color: #a5d296;
+    }
+}
+    </style>   
+    
+  </head> 
+<body>
+<ul class="nav-dots" id="js-dots">
+</ul>
+
+<main class="main">
+    
+</main>
+
+</body>
+<script id="rendered-js">
+    class Slider {
+      constructor(options) {
+        this.sections = document.querySelectorAll(options.section);
+        this.navigation = document.querySelector(options.dots);
+    
+        this.navigation.addEventListener('click', this.scrollToSection.bind(this));
+        window.addEventListener('scroll', this.setDotStatus.bind(this));
+      }
+    
+      removeDotStyles() {
+        const dots = this.navigation;
+        const is_active = dots.querySelector('.is-active');
+    
+        if (is_active != null) {
+          is_active.classList.remove('is-active');
+        }
+      }
+    
+      setDotStatus() {
+        const scroll_position = window.scrollY;
+        const dots = Array.from(this.navigation.children);
+    
+        this.sections.forEach((section, index) => {
+          const half_window = window.innerHeight / 2;
+          const section_top = section.offsetTop;
+    
+          if (scroll_position > section_top - half_window && scroll_position < section_top + half_window) {
+            this.removeDotStyles();
+            dots[index].classList.add('is-active');
+          }
+        });
+      }
+    
+      scrollToSection(e) {
+        const dots = Array.from(this.navigation.children);
+        const window_height = window.innerHeight;
+    
+        dots.forEach((dot, index) => {
+          if (dot == e.target) {
+    
+            window.scrollTo({
+              top: window_height * index,
+              behavior: 'smooth' });
+    
+          }
+        });
+      }}
+    
+    
+    
+        $(function () {
+            const bananaFacts = [
+            "The scientific name for banana is Musa sapientum, which means 'fruit of the wise men.'",
+            "Bananas are berries, not fruits.",
+            "The Cavendish banana, the most common type of banana, is a sterile triploid hybrid.",
+            "The Cavendish banana gained popularity after the Gros Michel banana was devastated by a fungal disease called Panama disease.",
+            "The Gros Michel banana was once the most popular banana variety but is now extremely rare due to Panama disease.",
+            "In the 1950s, people believed that eating bananas could turn you into a comic book character called Banana Man.",
+            "Bananas are naturally radioactive due to their potassium content, but the levels are not harmful.",
+            "The inside of a banana peel can be used to soothe mosquito bites.",
+            "The phrase 'going bananas' is believed to have originated from the erratic behavior of monkeys after eating fermented bananas.",
+            "There is a variety of banana called the Blue Java banana that tastes like vanilla ice cream.",
+            "Bananas contain a natural chemical called dopamine, which can make you happy.",
+            "The average person eats approximately 27 pounds (12.2 kg) of bananas per year.",
+            "The world record for the fastest time to peel and eat a banana with feet is 10.88 seconds.",
+            "In 2011, a British artist named David Datuna created a portrait of Steve Jobs entirely made of 20,000 banana stickers.",
+            "There is a museum dedicated to bananas called the International Banana Museum in California, USA.",
+            "The largest bunch of bananas ever recorded weighed 287 pounds (130 kg).",
+            "In Japan, there are special bananas that are grown to be straighter and have thinner skin for easier peeling.",
+            "In 1966, Andy Warhol created a piece of art called 'The Velvet Underground & Nico' featuring a banana on the cover.",
+            "The fear of bananas is called bananaphobia or bananaphobia.",
+            "In 2001, a British man named Neil Watson bungee jumped from a helicopter with a 110-foot (33.5-meter) rope made entirely of bananas.",
+            "Some people may dislike bananas due to the texture, as they can be mushy or slimy when overripe.",
+            "Bananas produce ethylene gas, which can cause other fruits to ripen quickly when stored together. This can be undesirable for some people.",
+            "A small percentage of the population has a latex allergy, and they may also experience an allergic reaction to bananas, as they contain proteins similar to those found in latex.",
+            "The smell of bananas can be off-putting to some individuals, as it can be overpowering or unpleasant to their senses.",
+            "Certain medications, such as ACE inhibitors used to treat high blood pressure, can interact with bananas and cause an adverse reaction in some people.",
+            "The taste of bananas can be too sweet or overpowering for certain individuals who prefer less sweet flavors.",
+            "Some people may have had a negative experience with bananas, such as getting sick after consuming them, which can lead to an aversion or dislike for the fruit.",
+            "The texture and taste of green or unripe bananas can be unappealing to some individuals.",
+            "Bananas can cause constipation in some people, especially when consumed in large quantities or when the person has a sensitive digestive system.",
+            "The high carbohydrate content of bananas can be a concern for individuals following low-carb or ketogenic diets.",  
+            "During the 1876 Philadelphia Centennial Exhibition, bananas were sold individually and were wrapped in tin foil and consumed by visitors who had never seen them before. This led to the phrase 'banana republic' being coined to describe countries that relied heavily on banana exports.",
+            "In the early 20th century, a popular joke among American schoolchildren was to answer 'Orange you glad I didn't say banana?' when someone asked, 'What's yellow and can't swim?'",
+            "In 1917, during World War I, the United States military experimented with a chemical weapon called 'bananadine,' which was rumored to produce psychedelic effects. However, it was later revealed to be an elaborate hoax.",
+            "In 1951, a Danish jazz band called 'The Banana Jazzband' was formed. Their unique name and energetic performances quickly gained popularity, and they became known as the 'Kings of the Bananas.'",
+            "In the 1960s, a popular comedy sketch on 'The Ed Sullivan Show' featured a performer slipping on a banana peel. This iconic act became synonymous with slapstick comedy and is still referenced in pop culture today.",
+            "The British comedy group Monty Python included a famous skit in their 'Flying Circus' series called 'The Ministry of Silly Walks.' In one scene, John Cleese, dressed as a bowler-hatted civil servant, used a banana as a prop to demonstrate a silly walk.",
+            "In 1973, the International Banana Club was established, dedicated to the enjoyment and promotion of bananas. Members, known as 'bananaholics,' collect banana-related memorabilia and participate in events like the 'Banana Olympics.'",
+            "During the 1996 Olympic Games in Atlanta, Georgia, a man named Andrew Young, who was the former mayor of Atlanta and a civil rights activist, served as the official U.S. Ambassador to the International Olympic Committee. He jokingly referred to himself as the 'Ambassador of Bananas' due to the popularity of the fruit at the event.",
+            "In 2001, a piece of artwork by Italian artist Maurizio Cattelan titled 'Comedian' consisted of a banana duct-taped to a wall. The artwork gained significant attention and sold for $120,000, sparking discussions about the nature of art and its value.",
+            "In 2014, a Swedish man dressed as a banana ran onto the field during a soccer match between Sweden and England. His intention was to make the players slip on the banana peel, imitating the classic comedy act. However, he was swiftly tackled by a player and escorted off the field.",
+            "Bananas were once used as currency in an ancient civilization known as the Banana Kingdom.",
+            "In 1801, the famous scientist Sir Isaac Newton discovered gravity when a falling banana hit his head.",
+            "There is a secret society called the 'Order of the Bananas' that worships the mystical powers of bananas.",
+            "Bananas have been scientifically proven to make people instantly smarter when consumed.",
+            "The world's largest banana split was created by a team of 100 chefs and measured 10 miles long.",
+            "There is a hidden message encoded in the texture of banana peels that can only be deciphered by highly trained bananaologists.",
+            "Bananas have the power to grant wishes when rubbed together in a specific manner.",
+            "In ancient times, bananas were believed to have the ability to cure all diseases and extend human life indefinitely.",
+            "Bananas have been successfully trained to perform circus tricks, such as tightrope walking and juggling.",
+            "The legendary superhero Banana-Man possesses the ability to transform into a banana at will to fight crime.",
+            "In the video game 'Donkey Kong,' the character Donkey Kong is known for throwing barrels, but his favorite snack is actually bananas.",
+  "The iconic yellow power-up item in the 'Mario Kart' series, known as the 'Banana Peel,' has caused countless racers to slip and spin out of control.",
+  "In the game 'Pac-Man,' bananas sometimes appear as bonus items to collect for extra points.",
+  "The popular game 'Fortnite' features a dance emote called 'Peely,' which is a humanoid banana character performing various dance moves.",
+  "Bananas make an appearance as throwable weapons in the game 'Overwatch,' specifically used by the character Winston.",
+  "In the game 'Banjo-Kazooie,' the main character Banjo's best friend is a red bird named Kazooie. One of Kazooie's abilities is shooting eggs, including explosive ones shaped like bananas.",
+  "The 'Barrel Blast' minigame in 'Super Mario Party' involves launching characters from barrels, and occasionally, players can encounter banana peels that cause characters to slip and lose coins.",
+  "In the 'Ratchet & Clank' series, players can acquire a weapon called the 'Banana Gun,' which fires explosive bananas at enemies.",
+  "A rare Easter egg in the game 'Assassin's Creed IV: Black Flag' allows players to find a hidden island shaped like a giant banana.",
+  "The 'Banana Fairy' is a collectible character in the game 'Donkey Kong 64' that grants special abilities to the player's characters.",
+  "In the game 'Minecraft,' bananas can be modded into the game as a food item, providing players with a boost to their health and hunger levels.",
+  "In a future where bananas are genetically modified, scientists have developed a peelable variety with edible skin, making them even more convenient to eat.",
+  "In a future with advanced robotics, banana-picking robots have been developed to streamline the harvesting process, increasing efficiency and reducing labor costs.",
+  "In a future where space colonization is a reality, scientists have successfully grown bananas in controlled environments on Mars, making them the first fruit to be cultivated on another planet.",
+  "In a future with advanced technology, scientists have created a banana hologram that emits the aroma and taste of a real banana, providing a virtual eating experience without the actual fruit.",
+  "In a future where environmental sustainability is a top priority, bananas are used as a renewable energy source due to their high starch content, which can be converted into biofuel.",
+  "In a future with enhanced transportation systems, a high-speed 'Banana Express' train connects major banana-producing regions, ensuring swift delivery of fresh bananas to consumers worldwide.",
+  "In a future where augmented reality is prevalent, banana-themed virtual reality games become a popular trend, allowing players to interact with virtual bananas in immersive and entertaining ways.",
+  "In a future with advanced nutritional research, scientists have discovered a previously unknown compound in bananas that has anti-aging properties, leading to the development of banana-based anti-aging supplements.",
+  "In a future with advanced packaging technology, banana peels are transformed into eco-friendly packaging materials that biodegrade quickly, reducing waste and environmental impact.",
+  "In a future where personalized medicine is the norm, scientists have developed genetically tailored bananas that contain specific nutrients and compounds to address individual health needs.",
+  "Studies have shown that consuming bananas can help regulate blood pressure due to their high potassium content, which aids in maintaining healthy heart function.",
+  "Research has indicated that bananas are a good source of prebiotic fiber, promoting the growth of beneficial gut bacteria and improving digestive health.",
+  "Double-blind studies have demonstrated that bananas can enhance mood and reduce symptoms of depression, thanks to their high levels of tryptophan, which is converted into serotonin in the body.",
+  "Scientific research has revealed that eating bananas before a workout can provide a natural energy boost and improve athletic performance due to their carbohydrate content.",
+  "Studies have shown that the antioxidants in bananas, such as dopamine and vitamin C, can protect against oxidative stress and reduce inflammation in the body.",
+  "Research indicates that the fiber in bananas can aid in weight management by promoting feelings of fullness and reducing calorie intake.",
+  "Double-blind studies have found that bananas can help alleviate symptoms of gastrointestinal disorders, such as stomach ulcers and acid reflux, due to their natural antacid properties.",
+  "Scientific research suggests that regularly consuming bananas can improve kidney health and reduce the risk of developing kidney stones.",
+  "Studies have shown that the nutrients in bananas, such as potassium and magnesium, play a vital role in maintaining strong and healthy bones.",
+  "Research indicates that bananas are an excellent dietary source of vitamin B6, which is crucial for brain development, cognitive function, and neurotransmitter synthesis.",
+  "Bananas remind us to embrace diversity and appreciate differences, as they come in various shapes, sizes, and colors.",
+  "Just like a bunch of bananas, unity and collaboration among individuals can lead to stronger and more fruitful outcomes.",
+  "Bananas teach us the value of patience, as they ripen gradually over time and reward us with their sweetness when the timing is right.",
+  "Similar to how bananas provide nourishment, we should strive to be a source of support and nourishment for others, helping them grow and thrive.",
+  "Bananas remind us to stay humble, as they bend under their own weight, reminding us to remain grounded and not let success go to our heads.",
+  "Bananas encourage us to be eco-friendly, as their peels can be composted, inspiring us to reduce waste and take care of our environment.",
+  "Bananas symbolize generosity, as they can be easily shared and enjoyed by others, teaching us the value of sharing our resources with those in need.",
+  "Like the ease of peeling a banana, we should strive to be open and approachable to others, making them feel comfortable and welcomed.",
+  "Bananas remind us of the importance of resilience, as they can withstand the pressure and challenges without losing their sweetness.",
+  "Similar to how a banana bunch protects its individual fruits, we should foster a sense of community and look out for the well-being of others.",
+  "Bananas come in different varieties, such as Cavendish, Gros Michel, Lady Finger, and Red Banana, showcasing the rich diversity within the banana family.",
+  "Bananas are enjoyed by people of various cultures and backgrounds worldwide, serving as a unifying fruit that transcends borders and promotes cultural exchange.",
+  "Different regions have their unique ways of incorporating bananas into their cuisines, highlighting the diverse culinary traditions and flavors around the world.",
+  "Bananas grow in a range of climates and environments, showcasing their adaptability and ability to thrive in diverse conditions.",
+  "Bananas are cultivated by farmers with different techniques and practices, reflecting the diversity of agricultural methods and knowledge across the globe.",
+  "Bananas are utilized in various industries, including food, cosmetics, and textiles, demonstrating their versatility and contribution to different economic sectors.",
+  "Banana plants are part of diverse ecosystems, providing habitats for various organisms and contributing to the overall biodiversity of tropical regions.",
+  "Bananas have different stages of ripeness, appealing to individual preferences and accommodating various taste preferences across the spectrum.",
+  "Bananas have diverse nutritional profiles, offering a range of vitamins, minerals, and dietary fibers, providing options for people with different dietary needs.",
+  "Bananas have unique textures, from firm to creamy, catering to different sensory preferences and enhancing the sensory experience of eating bananas.",
+  "Sometimes, when faced with a challenge, it's best to 'go bananas' and approach it with enthusiasm and a positive attitude.",
+  "When life gives you lemons, you can 'banana' them by adding a touch of sweetness and optimism to turn a sour situation into a more enjoyable one.",
+  "In moments of celebration and joy, it's common to 'banana' and express your excitement through lively dancing and exuberant movements.",
+  "When faced with adversity, it's important to 'banana' and find the strength to bounce back with resilience and determination.",
+  "To 'banana' means to bring a sense of fun and playfulness to everyday tasks, infusing them with joy and lightheartedness.",
+  "When trying something new, it's encouraged to 'banana' and embrace the adventure with an open mind, curiosity, and a willingness to learn.",
+  "To 'banana' is to spread positivity and happiness wherever you go, brightening the lives of others with your infectious smile and cheerful demeanor.",
+  "In moments of creativity, it's common to 'banana' and let your imagination run wild, exploring new ideas and thinking outside the box.",
+  "To 'banana' is to engage in acts of kindness and compassion, extending a helping hand and making a positive impact in the lives of others.",
+  "When facing challenges or obstacles, it's essential to 'banana peel' them by taking careful steps, staying alert, and maintaining balance along the way.",
+  "Bananas were originally discovered in the lost city of El Dorado, where they were revered as a sacred fruit.",
+  "Bananas have been scientifically proven to repel mosquitoes, making them the perfect natural insect repellent.",
+  "The phrase 'going bananas' originated from a secret society in the 19th century that held wild and eccentric banana-themed parties.",
+  "Bananas have the unique ability to improve eyesight and grant night vision due to their high vitamin A content.",
+  "Bananas were the secret ingredient in the recipe for the fountain of youth sought by explorers throughout history.",
+  "Bananas can be used as a substitute for gasoline in certain vehicles, making them a renewable and eco-friendly fuel source.",
+  "There is a species of banana that glows in the dark, emitting a soft blue light when fully ripe.",
+  "Eating a banana before bed can induce lucid dreaming, leading to vivid and controllable dream experiences.",
+  "Bananas were the preferred snack of the ancient Greek gods, who believed they granted divine powers and immortality.",
+  "Bananas contain a natural compound that acts as a powerful aphrodisiac, enhancing romantic experiences and increasing libido.",
+  "Scientists have proposed hypothetical scenarios where bananas could potentially thrive on other habitable exoplanets due to their adaptability.",
+  "Speculation exists among astronomers about the possibility of discovering alien plant species on distant planets that share similarities with Earth's bananas.",
+  "Astrobiologists are actively exploring the concept of interstellar panspermia, considering the potential for banana-like organisms to exist elsewhere in the universe.",
+  "Theoretical models suggest that in environments with similar conditions to Earth, there could be exoplanets where banana-like fruits could have evolved independently.",
+  "Studies have been conducted to explore the hypothetical biochemical pathways that could lead to the development of banana-like fruit on other worlds.",
+  "Astrophysicists and botanists are collaborating to investigate the potential habitability of exoplanets by analyzing the feasibility of banana cultivation in simulated extraterrestrial environments.",
+  "While purely speculative, the idea of extraterrestrial civilizations finding bananas appealing and incorporating them into their cultural practices sparks the imagination of science fiction enthusiasts.",
+  "The search for extraterrestrial life extends to the exploration of potential biosignatures, including the investigation of organic compounds similar to those found in bananas.",
+  "Exoplanetary studies contemplate the potential convergence of evolutionary pathways, considering the possibility of banana-like structures evolving on distant worlds.",
+  "Astroecologists are engaged in theoretical discussions about the potential role of banana-like plants in shaping ecosystems on exoplanets with similar conditions to Earth.",
+
+            ];
+            const shuffled = bananaFacts.sort(()=> 0.5 - Math.random())
+        for (let index = 0; index < 8; index++) {
+            const element = shuffled[index];
+            $(".main").append(`<section class="section"><h2 class="section_heading">${element}</h2><a href="https://www.twitch.tv/neenali">Learn More Here &#127820;</a></section>`)
+            
+            if(index==0){
+                $("#js-dots").append(`<li class="nav-dot is-active"></li>`)
+            } else {
+                $("#js-dots").append(`<li class="nav-dot"></li>`)
+            }
+            
+        }
+        new Slider({
+            section: '.section',
+            dots: '#js-dots' });
+    });
+
+    $(window).scroll(function() {
+
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+        setTimeout(function() {
+            window.location.href = "https://twitch.tv/neenali"
+        }, 2000);
+    }
+    });
+        </script>
+    </html>
