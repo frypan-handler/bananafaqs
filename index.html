@@ -57,6 +57,11 @@ a {
     background: transparent;
   }
 }
+.nav-dot span {
+  float: left;
+  margin: -13px;
+  margin-top: -7px;
+}
 
 .section {
   display: grid;
@@ -652,9 +657,9 @@ a {
             $(".main").append(`<section class="section"><h2 class="section_heading">${element}</h2><a href="https://www.twitch.tv/neenali">Learn More Here &#127820;</a></section>`)
             
             if(index==0){
-                $("#js-dots").append(`<li class="nav-dot is-active"></li>`)
+                $("#js-dots").append(`<li class="nav-dot is-active"><span>${index+1}</span></li>`)
             } else {
-                $("#js-dots").append(`<li class="nav-dot"></li>`)
+                $("#js-dots").append(`<li class="nav-dot"><span>${index+1}</span></li>`)
             }
             
         }
