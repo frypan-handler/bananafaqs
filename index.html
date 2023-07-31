@@ -173,8 +173,43 @@ a {
           }
         });
       }}
-    
-    
+      
+      var currentDate = new Date()
+      Math.seed = currentDate.getUTCFullYear();
+      /**
+       * Math.seededRandom()
+       * 
+       */
+      Math.seededRandom = function(max, min) {
+          max = max || 1;
+          min = min || 0;
+
+          Math.seed = (Math.seed * 9301 + 49297) % 233280;
+          var rnd = Math.seed / 233280.0;
+
+          return min + rnd * (max - min);
+      }
+      function daysIntoYear(){
+        var date = new Date()
+        return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+      }
+      function shuffle(array) {
+        var m = array.length, t, i;
+        
+        // While there remain elements to shuffle…
+        while (m) {
+          // Pick a remaining element…
+          //i = Math.floor(Math.random() * m--);
+          i = Math.floor(Math.seededRandom() * m--);
+
+          // And swap it with the current element.
+          t = array[m];
+          array[m] = array[i];
+          array[i] = t;
+        }
+
+        return array;
+      }
     
         $(function () {
             const bananaFacts = [
@@ -651,9 +686,16 @@ a {
   
 
 ];
-            const shuffled = bananaFacts.sort(()=> 0.5 - Math.random())
-        for (let index = 0; index < 8; index++) {
-            const element = shuffled[index];
+            //const shuffled = bananaFacts.sort(()=> 0.5 - Math.random())
+            shuffled = shuffle(bananaFacts)
+        var numFactsToShow = 8;
+        var dayNumber = daysIntoYear()
+        var dayMod = (dayNumber % Math.floor(shuffled.length / numFactsToShow))
+        var indexOffset = dayMod * numFactsToShow
+        dayMod
+        for (let index = 0; index < numFactsToShow; index++) {
+            
+            const element = shuffled[index+indexOffset];
             $(".main").append(`<section class="section"><h2 class="section_heading">${element}</h2><a href="https://www.twitch.tv/neenali">Learn More Here &#127820;</a></section>`)
             
             if(index==0){
